@@ -1,0 +1,346 @@
+@media (max-width: 1024px) {
+
+.header {
+    position: fixed;
+    z-index: 1000;
+    background: linear-gradient(to bottom, var(--wh-rgba-6), var(--clear));
+    width: 100%;
+    height: 80px;
+}
+
+.nav { display: none; }
+
+.icon--top {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+}
+
+.icon--top img { width: 200px; }
+
+/* ============================================
+    Section 1 - トップページ
+============================================ */
+
+#section1 { min-height: 100vh; }
+
+.cover--page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    will-change: clip-path;
+    clip-path: circle(200% at 50% 0%);
+}
+
+.scroll-indicator {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    font-size: var(--fz25);
+    color: var(--wh);
+}
+
+.scrolling--content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.text--container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    height: 300%;
+    padding: 3rem 1.5rem;
+    line-height: 200%;
+    background-color: var(--bk-rgba-6);
+    color: var(--wh);
+    font-size: var(--fz16);
+}
+
+.flow--image__single {
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flow--image__single img { width: 100%; }
+
+/* ============================================
+    Section 2 - 観光地編
+============================================ */
+
+#section2 {
+    background-color: var(--wh);
+    margin-top: 100vh;
+    padding: 0;
+}
+
+.h1--section {
+    padding: 5vh 0;
+    text-align: center;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+
+.container--1, .container--2, .container--3 {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    background-color: var(--wh);
+    padding: 3rem 1.5rem;   
+}
+
+.・1--video, .・2--video, .・3--video { display: none; }
+
+.mask--1, .mask--2, .mask--3 { display: none; }
+
+#・1, #・2, #・3 { display: none; }
+
+.container--1__text, .container--2__text, .container--3__text {
+    width: 100%;
+    padding: 0;
+}
+
+.tamanegi_kaisho--h2__section2 {
+    font-family: "玉ねぎ楷書", sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 160%;
+    border-left: 4px solid #000000;
+    padding-left: 15px;
+    margin-bottom: 1rem;
+}
+
+.video--images__1, .video--images__2, .video--images__3 {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 1rem 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.video--images__1 { background-image: url('../video/video--1.jpg'); }
+.video--images__2 { background-image: url('../video/video--2.jpg'); }
+.video--images__3 { background-image: url('../video/video--3.jpg'); }
+
+.azuki--p__section2 {
+    font-family: "あずきフォント", sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    line-height: 180%;
+    margin-bottom: 1rem;
+}
+
+.hr--h2__section2 {
+    border-top: 3px double var(--bk);
+    margin: 1rem 0;
+}
+
+.hr--section2__class {
+    text-align: center;
+    margin: 1% 0;
+}
+
+.hr--section2 {
+    border-top: 2px dashed var(--bk);
+    width: 80%;
+    margin: 0 auto;
+}
+
+.space { display: none; }
+
+/* ============================================
+    Section 3 - グルメ編
+============================================ */
+
+#section3 {
+    background-color: var(--wh);
+    padding-bottom: 1.5rem;
+}
+
+.gourmet {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.5rem;
+}
+
+.gourmet--reverse { flex-direction: column; }
+
+.picture--sp { margin: 30px 0; }
+
+.picture--sp img {
+    width: 80%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.gourmet--spot {
+    width: 100%;
+    height: auto;
+    row-gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gourmet--spot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+}
+
+.gourmet--spot__top {
+    width: 100%;
+    height: 250px;
+}
+
+.gourmet--spot__bottom {
+    display: flex;
+    column-gap: 8px;
+    width: 100%;
+    height: 120px;
+}
+    
+.gourmet--spot__left, .gourmet--spot__right {
+    flex: 1;
+    height: 100%;
+}
+
+.gourmet--text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    writing-mode: horizontal-tb;
+}
+
+.gourmet--text__image {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.gourmet--text__image img {
+    width: 100%;
+    height: auto;
+}
+
+.azuki--p__section3 {
+    font-family: "あずきフォント", sans-serif;
+    font-size: clamp(0.85rem, 2.8vw, 1rem);
+    line-height: 180%;
+}
+
+.azuki--p__section3 p { margin: 1rem 0; }
+
+.gourmet--button {
+    width: 100%;
+    margin-top: 0.3rem;
+    text-align: center;
+}
+
+.gourmet--button__font {
+    font-family: "あずきフォント", sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    padding: 0.8rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.gourmet--button__font img {
+    width: 20px;
+    height: 20px;
+}
+    
+/* ============================================
+    Section 4 - お問い合わせ
+============================================ */
+
+#section4 { padding: 3rem 0; }
+
+.container {
+    max-width: 100%;
+    padding: 1.5rem;
+}
+    
+.container h2 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    margin: 2rem 0 1rem;
+}
+
+.note {
+    padding: 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+}
+
+.note ul {
+    padding-left: 1.5rem;
+    list-style: disc;
+}
+
+.note li { margin: 0.5rem 0; }
+
+.form-group { margin-bottom: 1.5rem; }
+
+label { font-size: 0.95rem; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+        font-size: 16px;
+        padding: 12px;
+}
+
+.submit-button {
+    font-size: 16px;
+    padding: 12px;
+}
+
+.contact-info {
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    margin-top: 2rem;
+}
+
+.contact-info p {
+    font-size: 0.95rem;
+    margin: 0.5rem 0;
+}
+
+/* ============================================
+    ユーティリティ
+============================================ */
+
+.pc-only-br { display: none; }
+
+.striped--line__1 { height: 8px; }
+
+.striped--line__2 {
+    height: 5px;
+    width: 30%;
+}
+
+}

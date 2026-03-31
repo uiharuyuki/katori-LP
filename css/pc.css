@@ -1,0 +1,323 @@
+@media (min-width: 1025px) {
+
+.header { 
+    position: fixed;
+    z-index: 1000;/* ----------- 1000 ----------- */
+    background: linear-gradient(
+        to bottom,
+        var(--wh-rgba-6),
+        var(--clear)
+    );
+    width: 100%;
+    height: 15%;    
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nav {
+    display: flex;
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    gap: 4rem;
+    transform: translate(-50%, 0);
+    align-items: center;
+    font-size: var(--fz26);
+    color: var(--bk);
+}
+
+.menu-container { display: none;}
+
+.space { height: 15vh; }
+
+/* ---------------------------------------------------------------------------- */
+    /* section1 */
+/* ---------------------------------------------------------------------------- */
+
+#section1 { min-height: 1700px; }
+
+.cover--page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;/* ----------- 999 ----------- */
+    will-change: clip-path;
+    clip-path: circle(200% at 50% 0%);
+}
+
+.scroll-indicator {
+    position: fixed;
+    top: 93%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;/* ----------- 1000 ----------- */
+    font-size: var(--fz34);
+    color: var(--wh);
+}
+
+.video--top {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.scrolling--content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;/* ----------- 10 ----------- */
+}
+
+.icon--top {
+    position: fixed;
+    top: 3.3%;
+    left: 2%;
+}
+
+.icon--top img { width: 270px; }
+
+.flow--image {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+    height: auto;
+    object-fit: contain;
+    will-change: transform;
+}
+
+.flow--image_1 {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 17%;
+    height: auto;
+    object-fit: contain;
+    will-change: transform;
+}
+
+.text--container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    height: 500%;
+    padding: 10rem 8rem;
+    line-height: 240%;
+    background-color: var(--bk-rgba-6);
+    color: var(--wh);
+    font-size: var(--fz22);
+}
+
+.flow--image__single {
+    width: 700px;
+    height: auto;
+    position: absolute;
+    top: 165%;
+    left: 50%;
+    transform: translateX(-35%);
+}
+
+.flow--image__single img { width: 100%; }
+
+/* ---------------------------------------------------------------------------- */
+    /* section1 */
+/* ---------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------------- */
+    /* section2 */
+/* ---------------------------------------------------------------------------- */
+
+.section2--page { margin-top: 350px; }
+
+.container--1, .container--2, .container--3 {
+    min-height: 100vh;
+    background-color: var(--wh);
+    position: relative;
+    z-index: 0;/* ----------- 0 ----------- */
+    display: flex;
+}
+
+.video-mask-container {
+    width: 50%;
+    height: 100vh;
+    position: relative;
+}
+
+.・1--video, .・2--video, .・3--video {
+    position: absolute;
+    z-index: -1;/* ----------- -1 ----------- */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.mask--1, .mask--2, .mask--3 {
+    height: 100%;
+    width: 100%;
+    background: var(--wh);
+    mix-blend-mode: screen;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;/* ----------- 0 ----------- */
+}
+
+/* ---------------------------------------------------------------------------- */
+
+#・1 {
+    font-size: 800px;
+    color: var(--bk);
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+}
+
+#・2, #・3 {
+    font-size: 1800px;
+    color: var(--bk);
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+}
+
+/* ---------------------------------------------------------------------------- */
+
+.container--1__text {
+    position: relative;
+    z-index: 1;/* ----------- 1 ----------- */
+    background: var(--wh);
+    width: 50%;
+    padding: 7% 10% 0 0 ;
+}
+
+.container--2__text {
+    position: relative;
+    z-index: 1;/* ----------- 1 ----------- */
+    background: var(--wh);
+    width: 50%;
+    padding: 4% 0 0 6% ;
+}
+
+.container--3__text {
+    position: relative;
+    z-index: 1;/* ----------- 1 ----------- */
+    background: var(--wh);
+    width: 50%;
+    padding: 4% 10% 0 0 ;
+}
+
+.hr--h2__section2 { border-top: 5px double var(--bk); }
+
+.hr--section2__class { text-align: center; }
+
+.hr--section2 {
+    border-top: 2px dashed var(--bk);
+    width: 70%;
+    margin: 0 auto;
+}
+
+.container--text__p { margin: 5% 0 }
+
+/* ---------------------------------------------------------------------------- */
+    /* section2 */
+/* ---------------------------------------------------------------------------- */
+
+
+
+/* ---------------------------------------------------------------------------- */
+    /* section3 */
+/* ---------------------------------------------------------------------------- */
+
+#section3 {
+    position: relative;
+    z-index: 999;/* ----------- 999 ----------- */
+}
+
+.gourmet {
+    display: flex;
+    margin: 18vh 7% 0 7%;
+}
+
+.gourmet--reverse { flex-direction: row-reverse; }
+
+.gourmet--spot {
+    width: 35%;
+    height: 500px;
+    row-gap: 8px;
+    margin: 0 4%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gourmet--spot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gourmet--spot__top {
+    flex: 2;
+    min-height: 0;
+    width: 100%;
+}
+
+.gourmet--spot__bottom {
+    flex: 1;
+    display: flex;
+    column-gap: 8px;
+    min-height: 0;
+    width: 100%;
+}
+
+.gourmet--spot__left, .gourmet--spot__right {
+    flex: 1;
+    height: 100%; min-width: 0;
+}
+
+.gourmet--text {
+    width: 60%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 4%;
+    margin-left: auto;
+    writing-mode: vertical-rl;
+    justify-content: center;
+}
+
+.gourmet--reverse__text { margin-right: auto; }
+
+.gourmet--text__image { width: 100%; }
+
+.gourmet--text__image img { width: 100%; height: 100%; }
+
+.gourmet--button {
+    width: 100%;
+    margin-top: 5%;
+    text-align: center;
+    align-items: center;
+}
+
+.gourmet--button p { padding: 5px 0; }
+
+}
+
+/* ---------------------------------------------------------------------------- */
+    /* section3 */
+/* ---------------------------------------------------------------------------- */

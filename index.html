@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香取観光ナビ｜香取市非公式観光サイト</title>
+
+    <!-- Import CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css"/>
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/pc.css">
+        <link rel="stylesheet" href="css/sp.css">
+        <link rel="stylesheet" href="css/carousel.css">
+
+    <!-- Import JS/CDN gsap -->
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Import JS -->
+        <script defer src="js/gsap.js"></script>
+        <script defer src="js/script.js"></script>
+        <script defer src="js/carousel.js"></script>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="icon--top">
+            <a href="#section1">
+                <img src="images/katori_rogo.svg" alt="icon--top">
+            </a>
+        </div>
+
+        <nav class="nav tamanegi_kaisho">
+            <a href="#section2">観光地編</a>
+            <a href="#section3">グルメ編</a>
+            <a href="#section4">お問い合わせ</a>
+        </nav>
+
+        <div class="menu-container">
+            <button class="menu-trigger"><span></span><span></span><span></span></button>
+            <nav class="circle-menu azuki">
+                <ul>
+                    <li><a href="#section1">ホーム</a></li>
+                    <li><a href="#section2">観光地編</a></li>
+                    <li><a href="#section3">グルメ編</a></li>
+                    <li><a href="#section4">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+
+    <section id="section1">
+
+        <div class="cover--page" id="coverPage">
+
+            <div class="carousel-container">
+
+                <!-- 動画要素 (3つ) -->
+                <video class="video--top active" autoplay muted loop playsinline data-index="0">
+                    <source src="video/video--1.mp4" type="video/mp4">
+                </video>
+                <video class="video--top" muted loop playsinline data-index="1">
+                    <source src="video/video--2.mp4" type="video/mp4">
+                </video>
+                <video class="video--top" muted loop playsinline data-index="2">
+                    <source src="video/video--3.mp4" type="video/mp4">
+                </video>
+
+                <!-- カルーセルオーバーレイ -->
+                <div class="carousel-overlay">
+                    <div class="carousel-content">
+                        <div class="carousel-text-container">
+                            <div class="carousel-text active azuki" data-index="0">
+                                佐原の町並み<br>
+                                北総の小江戸として<br>
+                                今なお残る風情
+                            </div>
+                            <div class="carousel-text azuki" data-index="1">
+                                香取神宮<br>
+                                千年の歴史を誇る<br>
+                                関東屈指のパワースポット
+                            </div>
+                            <div class="carousel-text azuki" data-index="2">
+                                伊能忠敬旧宅<br>
+                                測量の偉人が過ごした<br>
+                                江戸の面影
+                            </div>
+                        </div>
+                        <div class="carousel-dots">
+                            <div class="dot active" data-index="0"></div>
+                            <div class="dot" data-index="1"></div>
+                            <div class="dot" data-index="2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 矢印ボタン -->
+                <div class="carousel-arrows">
+                    <div class="arrow arrow-prev">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </div>
+                    <div class="arrow arrow-next">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scrolling--content" id="scrollingContent">
+                <div class="text--container azuki">
+                    <p>香取市は、</p>
+                    <p>水郷の景観と江戸情緒が息づく</p>
+                    <p>歴史の町。</p>
+                    <p>香取神宮や佐原の町並み、</p>
+                    <p>伊能忠敬ゆかりの文化が楽しめる</p>
+                    <p>魅力あふれる地域です。</p>
+                </div>
+
+                <div class="flow--image__single">
+                    <img src="images/katori_map.svg" alt="flow--image__single">
+                </div>
+            </div>
+
+            <div class="scroll-indicator azuki">↓ SCROLL ↓</div>
+        </div>
+
+    </section>
+
+    <main><!-- Section 2の該当部分のみ抜粋 -->
+        <section class="section2--page" id="section2">
+            <h1 class="h1--section azuki">おすすめ観光地！</h1>
+            <div class="striped--line__1"></div>
+            
+            <div class="container--1">
+                <div class="video-mask-container">
+                    <video autoplay loop muted class="・1--video">
+                        <source src="video/video--1.mp4" type="video/mp4">
+                    </video>
+                    <div class="mask--1">
+                        <p id="・1">・</p>
+                    </div>
+                </div>
+                <div class="container--1__text">
+                    <h2 class="tamanegi_kaisho--h2__section2">
+                        <ruby data-ruby="さわら">佐原<rt>さわら</rt></ruby>
+                        の
+                        <ruby data-ruby="まちな">町並<rt>まちな</rt></ruby>
+                        み
+                    </h2>
+        
+                    <!-- 画像バー -->
+                    <div class="video--images__1"></div>
+        
+                    <hr class="hr--h2__section2">
+                    <div class="container--text__p">
+                        <p class="azuki--p__section2">香取市を縦に流れる小野川の流域は、江戸時代の町並みが今なお残る、「北総の小江戸」として有名な地域である。</p>
+                        <p class="azuki--p__section2">利根川が物資の主な運輸網だったため、分流の小野川周辺には、河港となり旅館や商店が立ち並んでいた。</p>
+                        <p class="azuki--p__section2">川ぞりには重厚な木造建築が軒を連ねており、昔の繁栄ぶりをうかがうことができる。</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="hr--section2__class"><hr class="hr--section2"></div>
+            <div class="space"></div>
+        
+            <div class="container--2">
+                <div class="container--2__text">
+                    <h2 class="tamanegi_kaisho--h2__section2">
+                        <ruby data-ruby="か">香<rt>か</rt></ruby>
+                        <ruby data-ruby="とり">取<rt>とり</rt></ruby>
+                        <ruby data-ruby="じん">神<rt>じん</rt></ruby>
+                        <ruby data-ruby="ぐう">宮<rt>ぐう</rt></ruby>
+                    </h2>
+        
+                    <!-- 画像バー -->
+                    <div class="video--images__2"></div>
+        
+                    <hr class="hr--h2__section2">
+                    <div class="container--text__p">
+                        <p class="azuki--p__section2">香取市に鎮座する全国約400社の香取神社の総本社です。</p>
+                        <p class="azuki--p__section2">祭神は<ruby data-ruby="ふつぬしのおおかみ">経津主大神<rt>ふつぬしのおおかみ</rt></ruby>で、日本神話で<ruby data-ruby="たけみかづちのみこと">武甕槌命<rt>たけみかづちのみこと</rt></ruby>と共に<ruby data-ruby="あしはらのなかつくにへいてい">葦原中国平定<rt>あしはらのなかつくにへいてい</rt></ruby>に功績があった武道の神様です。</p>
+                        <p class="azuki--p__section2">伊勢神宮、鹿島神宮と共に、「神宮」の社号を持ち、古くから皇室や幕府からも崇敬されてきました。</p>
+                        <p class="azuki--p__section2">現在の社殿は江戸幕府5代将軍・徳川綱吉公の命により造営されたもので、本殿や楼門は国の重要文化財に指定されています。</p>
+                        <p class="azuki--p__section2">近隣の鹿島神宮と対をなす存在であり、厄除けや勝負運、開運招福の御利益があるとされ、多くの参拝者が訪れます。</p>
+                    </div>
+                </div>
+                <div class="video-mask-container">
+                    <video autoplay loop muted class="・2--video">
+                        <source src="video/video--2.mp4" type="video/mp4">
+                    </video>
+                    <div class="mask--2">
+                        <p id="・2">・</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="hr--section2__class"><hr class="hr--section2"></div>
+            <div class="space"></div>
+        
+            <div class="container--3">
+                <div class="video-mask-container">
+                    <video autoplay loop muted class="・3--video">
+                        <source src="video/video--3.mp4" type="video/mp4">
+                    </video>
+                    <div class="mask--3">
+                        <p id="・3">・</p>
+                    </div>
+                </div>
+                <div class="container--3__text">
+                    <h2 class="tamanegi_kaisho--h2__section2">
+                        <ruby data-ruby="い">伊<rt>い</rt></ruby>
+                        <ruby data-ruby="のう">能<rt>のう</rt></ruby>
+                        <ruby data-ruby="ただ">忠<rt>ただ</rt></ruby>
+                        <ruby data-ruby="たか">敬<rt>たか</rt></ruby>
+                        <ruby data-ruby="きゅう">旧<rt>きゅう</rt></ruby>
+                        <ruby data-ruby="たく">宅<rt>たく</rt></ruby>
+                    </h2>
+        
+                    <!-- 画像バー -->
+                    <div class="video--images__3"></div>
+        
+                    <hr class="hr--h2__section2">
+                    <div class="container--text__p">
+                        <p class="azuki--p__section2">江戸時代に日本初の全国実測地図を完成させた伊能忠敬は、17歳から49歳までを佐原で過ごしました。</p>
+                        <p class="azuki--p__section2">彼の旧宅は、国の史跡に指定されており、築200年以上の歴史を持つ建物です。</p>
+                        <p class="azuki--p__section2">醸造業などを営んでいた豪商・伊能家の繁栄を今に伝え、利根川の水運で栄えた小野川沿いに当時の面影を残しています。</p>
+                        <p class="azuki--p__section2">店舗や母屋、土蔵が現存し、小野川からの眺めは江戸時代の暮らしや賑わいを想像させます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section3">
+            <h1 class="h1--section azuki">おすすめグルメ！</h1>
+            <div class="striped--line__1"></div>
+
+            <div class="gourmet">
+
+                <picture class="picture--sp">
+                    <source srcset="images/gourmet-1/logo_yoko.svg" media="(max-width: 1024px)" alt="鰻ロゴ">
+                    <img src="">
+                </picture>
+
+                <div class="gourmet--spot">
+                    <div class="gourmet--spot__top">
+                        <img src="images/gourmet-1/top.jpg" alt="top">
+                    </div>
+                    <div class="gourmet--spot__bottom">
+                        <div class="gourmet--spot__left">
+                            <img src="images/gourmet-1/left.jpg" alt="left">
+                        </div>
+                        <div class="gourmet--spot__right">
+                            <img src="images/gourmet-1/right.jpg" alt="right">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gourmet--text">
+
+                    <picture>
+                        <source srcset="images/gourmet-1/logo.svg" media="(min-width: 1025px)" alt="鰻ロゴ">
+                        <img src="">
+                    </picture>
+
+                    <div class="azuki--p__section3">
+                        <p>佐原の鰻料理は、江戸時代に利根川の<br class="pc-only-br">水郷として栄えた歴史と深く結びついています。</p>
+                        <p>当時、新鮮な川魚が豊富に獲れ、<br class="pc-only-br">多くの老舗鰻屋が軒を連ねました。</p>
+                        <p>特徴は、職人が丁寧に焼き上げる鰻と、<br class="pc-only-br">各店秘伝の甘辛いタレの調和です。</p>
+                        <p>小江戸の風情残る町並みで味わうことで、<br class="pc-only-br">格別な体験ができます。</p>
+                        <p>歴史と文化を感じる鰻は、<br class="pc-only-br">水郷佐原観光協会のサイトなどで紹介される<br class="pc-only-br">魅力的な逸品です。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gourmet--button">
+                <div class="striped--line__2"></div>
+                <a href="https://maps.app.goo.gl/7J7uMbEMH3hryzsDA" target="_blank">
+                    <p class="gourmet--button__font">佐原周辺の鰻屋
+                        <img src="images/map_search_fz24.svg" alt="">
+                    </p>
+                </a>
+                <div class="striped--line__2"></div>
+            </div>
+
+            <div class="gourmet gourmet--reverse">
+
+                <picture class="picture--sp">
+                    <source srcset="images/gourmet-2/logo_yoko.svg" media="(max-width: 1024px)" alt="黒切そばロゴ">
+                    <img src="">
+                </picture>
+
+                <div class="gourmet--spot">
+                    <div class="gourmet--spot__top">
+                        <img src="images/gourmet-2/top.jpg" alt="top">
+                    </div>
+                    <div class="gourmet--spot__bottom">
+                        <div class="gourmet--spot__left">
+                            <img src="images/gourmet-2/left.jpg" alt="left">
+                        </div>
+                        <div class="gourmet--spot__right">
+                            <img src="images/gourmet-2/right.jpg" alt="right">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gourmet--text gourmet--reverse__text">
+                    <div class="gourmet--text__image">
+
+                        <picture>
+                            <source srcset="images/gourmet-2/logo.svg" media="(min-width: 1025px)" alt="黒切そばロゴ">
+                            <img src="">
+                        </picture>
+
+                    </div>
+                    <div class="azuki--p__section3">
+                        <p>佐原の老舗「小堀屋本店」で考案された黒切りそばは、寛政年間創業の歴史を持つ地域名物です。</p>
+                        <p>その最大の特徴は、生地に昆布を練り込むことによる漆黒の麺の色と、磯の風味です。</p>
+                        <p>そば粉は玄そばを挽いた「挽きぐるみ」を用いることが多く、これも濃い色合いを生み出します。</p>
+                        <p>昆布のグルタミン酸由来の旨味と、強いコシ、<br class="pc-only-br">ツルツルとした独特の喉越しの良さが魅力。</p>
+                        <p>水郷佐原の食文化が育んだ個性的なそばとして、地元で長く愛され続けています。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gourmet--button">
+                <div class="striped--line__2"></div>
+                <a href="https://maps.app.goo.gl/N1oMxdfuUifDXJiv5" target="_blank">
+                    <p class="gourmet--button__font">黒切そば屋（小堀屋本店）
+                        <img src="images/map_search_fz24.svg" alt="">
+                    </p>
+                </a>
+                <div class="striped--line__2"></div>
+            </div>
+
+            <div class="gourmet">
+
+                <picture class="picture--sp">
+                    <source srcset="images/gourmet-3/logo_yoko.svg" media="(max-width: 1024px)" alt="和菓子ロゴ">
+                    <img src="">
+                </picture>
+
+                <div class="gourmet--spot">
+                    <div class="gourmet--spot__top">
+                        <img src="images/gourmet-3/top.jpg" alt="top">
+                    </div>
+                    <div class="gourmet--spot__bottom">
+                        <div class="gourmet--spot__left">
+                            <img src="images/gourmet-3/left.jpg" alt="left">
+                        </div>
+                        <div class="gourmet--spot__right">
+                            <img src="images/gourmet-3/right.jpg" alt="right">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gourmet--text">
+                    <div class="gourmet--text__image">
+
+                        <picture>
+                            <source srcset="images/gourmet-3/logo.svg" media="(min-width: 1025px)" alt="和菓子ロゴ">
+                            <img src="">
+                        </picture>
+
+                    </div>
+                    <div class="azuki--p__section3">
+                        <p>香取市佐原は、利根川水運で栄えた<br class="pc-only-br">「北総の小江戸」です。 </p>
+                        <p>江戸時代から続く歴史的町並みの中、<br class="pc-only-br">和菓子は地域の食文化を支える伝統として<br class="pc-only-br">根付いてきました。</p>
+                        <p>三百六十年以上の歴史を持つ「御菓子司 虎屋」や、
+                            <br class="pc-only-br">明治創業の「岩立本店」など老舗が多く、
+                            <br class="pc-only-br">職人が香取神宮の御神水や地元産サツマイモ
+                            <br class="pc-only-br">といった厳選素材を使用し、素朴で上品な
+                            <br class="pc-only-br">味わいを生み出しています。</p>
+                        <p>  特に、とろけるような「わらび餅」や芋菓子は
+                            <br class="pc-only-br">看板商品で、その伝統の味は今も多くの人々を
+                            <br class="pc-only-br">魅了しています。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gourmet--button">
+                <div class="striped--line__2"></div>
+                <a href="https://tabelog.com/rst/rstmap?clon=140.51906213158307&clat=35.881558701267&lz=5&PG=1&memo=0&SrtT=rt&lid=&LstCnt=0&LunchFlg=0&Cat=SC&LstCat=SC02&LstCatD=SC0202&LstCatSD=&vac_net=0&search_date=2025%2F12%2F10(%E6%B0%B4)&svd=20251210&svps=2&svt=1900&RdoCosTp=2&LstCos=0&LstCosT=0&LstRev=0&sw=&LstReserve=0&LstSmoking=0" target="_blank">
+                    <p class="gourmet--button__font">佐原周辺の和菓子屋
+                        <img src="images/map_search_fz24.svg" alt="">
+                    </p>
+                </a>
+                <div class="striped--line__2"></div>
+            </div>
+
+        </section>
+
+        <section id="section4">
+            <div><h1 class="h1--section azuki">お問い合わせ</h1></div>
+            <div class="striped--line__1"></div>
+
+            <div class="container">
+        
+                <div class="note">
+                    <p>ご質問、ご意見、ご要望など、ございましたら下記フォームよりお気軽にお問い合わせください。</p>
+                    <ul>
+                        <li>お問い合わせ内容によっては、お返事にお時間をいただく場合がございます。</li>
+                        <li><strong>必須</strong>の項目は必ずご入力をお願いいたします。</li>
+                    </ul>
+                </div>
+        
+                <h2>📝 お問い合わせフォーム</h2>
+                
+                <form action="#" method="POST">
+                    
+                    <div class="form-group">
+                        <label for="name">お名前<span class="required">【必須】</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="furigana">フリガナ<span class="required">【必須】</span></label>
+                        <input type="text" id="furigana" name="furigana" required>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="email">メールアドレス<span class="required">【必須】</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tel">電話番号</label>
+                        <input type="tel" id="tel" name="tel">
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="inquiry-type">お問い合わせ種別<span class="required">【必須】</span></label>
+                        <select id="inquiry-type" name="inquiry_type" required>
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="product">暮らし、手続きに関する質問</option>
+                            <option value="order">子育て、教育に関する質問</option>
+                            <option value="shop">健康、福祉に関する質問</option>
+                            <option value="media">メディア・取材に関する質問</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="details">お問い合わせ内容<span class="required">【必須】</span></label>
+                        <textarea id="details" name="details" required></textarea>
+                    </div>
+        
+                    <div class="form-group">
+                        <p style="font-size: 0.85em; text-align: center;">
+                            【個人情報の取り扱いについて】ご入力いただいた個人情報は、お問い合わせへの対応にのみ利用いたします。
+                        </p>
+                    </div>
+        
+                    <button type="submit" class="submit-button">送信する</button>
+        
+                </form>
+        
+                <hr style="border: 0; border-top: 1px dashed #ccc; margin: 40px 0;">
+        
+                <h2>📞 お電話でのお問い合わせ</h2>
+                <div class="contact-info">
+                    <p><strong>電話番号:</strong> 000-123-4567</p>
+                    <p><strong>受付時間:</strong> 10:00～17:00 (土日祝日を除く)</p>
+                </div>
+        
+            </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

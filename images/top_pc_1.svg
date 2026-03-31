@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 623.1 110.27">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: 'azuki_font', azuki_font;
+        font-size: 90px;
+      }
+    </style>
+  </defs>
+  <rect x="13.68" y="-1.82" width="5.7" height="110.48" rx="2.85" ry="2.85" transform="translate(-13.38 6.17) rotate(-15.14)"/>
+  <rect x="603.72" y="-1.82" width="5.7" height="110.48" rx="2.85" ry="2.85" transform="translate(1178.14 263.38) rotate(-164.86)"/>
+  <text class="cls-1" transform="translate(52.68 97.62)"><tspan x="0" y="0">北総の小江戸</tspan></text>
+</svg>

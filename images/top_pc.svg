@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3053.44 2619.23">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: 'azuki_font', azuki_font;
+        font-size: 522px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        opacity: .3;
+      }
+
+      .cls-3 {
+        fill: #040000;
+      }
+    </style>
+  </defs>
+  <ellipse class="cls-2" cx="1409.67" cy="1393.74" rx="1409.67" ry="1225.49"/>
+  <ellipse class="cls-2" cx="1643.77" cy="1284.01" rx="1409.67" ry="1225.49"/>
+  <ellipse class="cls-2" cx="1482.83" cy="1225.49" rx="1409.67" ry="1225.49"/>
+  <text class="cls-1" transform="translate(1126.13 1815.73)"><tspan x="0" y="0">町並み</tspan></text>
+  <text class="cls-1" transform="translate(369.87 1116.38)"><tspan class="cls-3" x="0" y="0">佐原</tspan><tspan x="1044" y="0">の</tspan></text>
+</svg>
