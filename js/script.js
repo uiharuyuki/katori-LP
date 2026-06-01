@@ -102,3 +102,36 @@ window.addEventListener('resize', () => {
         applyScrollAnimation();     // 現在のスクロール位置で再描画
     }, 200);
 });
+
+// -------------------------- セクション動画の遅延再生 --------------------------
+// トップ閲覧中、画面外のセクション動画(・1/2/3)まで autoplay で同時デコード
+// されるとメモリを圧迫し、ブラウザの強制リロードを誘発する。
+// そこで autoplay を外し、「初めて画面内に入った時に一度だけ再生開始」する。
+// ★ 一度再生したら監視を解除し、以降は停止/再開しない（＝スクロールでの
+//    再生・停止トグルによるメモリ乱高下＝churnを起こさない）。
+// ※ モバイルではセクション動画は CSS で display:none のため発火せず、
+//    元の背景画像(JPG)表示のまま。トップのカルーセルだけが再生される。
+(() => {
+    const sectionVideos = document.querySelectorAll('.・1--video, .・2--video, .・3--video');
+    if (!sectionVideos.length) return;
+
+    const playOnce = (video) => {
+        const p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {}); // 再生拒否は無視
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        sectionVideos.forEach(playOnce); // 非対応環境は従来どおり全再生
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            playOnce(entry.target);
+            obs.unobserve(entry.target); // 一度きり。以降は監視しない（churn防止）
+        });
+    }, { threshold: 0.25 });
+
+    sectionVideos.forEach((video) => observer.observe(video));
+})();
