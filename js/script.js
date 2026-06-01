@@ -50,10 +50,22 @@ const updateRadius = () => {
 updateRadius();
 
 // リサイズ時に再計算
+// 注意: resize は高さの変化でも発火する。スマホではスクロール時に
+// アドレスバーが開閉して高さが変わり resize が発火するため、
+// 「横幅が変わり、かつデバイス種別(モバイル/PC)が切り替わった時」だけリロードする。
 let resizeTimer;
+let lastWindowWidth = window.innerWidth;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-        location.reload(); // デバイス変更時はリロード
+        const currentWidth = window.innerWidth;
+        const wasMobile = lastWindowWidth <= 1024;
+        const nowMobile = currentWidth <= 1024;
+
+        // 横幅が変化し、かつモバイル/PCの境界をまたいだ場合のみリロード
+        if (currentWidth !== lastWindowWidth && wasMobile !== nowMobile) {
+            location.reload(); // デバイス種別の変更時はリロード
+        }
+        lastWindowWidth = currentWidth;
     }, 250);
 });
