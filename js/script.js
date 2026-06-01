@@ -109,9 +109,12 @@ function applyScrollAnimation() {
 const coverVideos = document.querySelectorAll('.video--top');
 function toggleCoverVideos(shouldPlay) {
     if (!coverVideos.length) return;
+    // モバイルでは、ユーザーがタップ等で再生を有効化した後だけ再生する（自動再生しない）。
+    // PCは常に再生してよい（従来どおり）。
+    const mobile = window.matchMedia('(max-width: 1024px)').matches;
     coverVideos.forEach((v) => {
         if (shouldPlay) {
-            if (v.classList.contains('active')) {
+            if (v.classList.contains('active') && (!mobile || window.__heroPlayEnabled)) {
                 const pr = v.play();
                 if (pr && typeof pr.catch === 'function') pr.catch(() => {});
             }
@@ -188,6 +191,19 @@ window.addEventListener('resize', () => {
 
     sectionVideos.forEach((video) => observer.observe(video));
 })();
+
+// -------------------------- モバイル: タップでヒーロー動画を再生 --------------------------
+// モバイルは初期 poster 表示（自動再生しない）。最初のタップで再生を有効化する。
+// .scrolling--content が前面に重なるため、確実に拾える document に登録し、
+// バブリングで受け取る。最上部にいる時だけ実際に再生する。
+if (window.matchMedia('(max-width: 1024px)').matches) {
+    const enableHeroPlayback = () => {
+        window.__heroPlayEnabled = true;
+        if (!coverHidden) toggleCoverVideos(true);
+    };
+    document.addEventListener('click', enableHeroPlayback);
+    document.addEventListener('touchend', enableHeroPlayback, { passive: true });
+}
 
 // -------------------------- バックグラウンド時は動画停止 --------------------------
 // タブ/アプリが非表示になった後も動画をデコードし続けると、iOS が「メモリを

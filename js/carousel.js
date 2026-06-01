@@ -19,6 +19,10 @@
     let autoPlayInterval = null;
     const autoPlayDelay = 5000; // 自動再生の間隔（ミリ秒）
 
+    // モバイル(≤1024px)では動画を自動再生しない（iOSのメモリ枯渇リロード対策）。
+    // PCは従来どおり自動再生。
+    const heroIsMobile = window.matchMedia('(max-width: 1024px)').matches;
+
     // ===========================
     // スライド切り替え関数
     // ===========================
@@ -40,9 +44,10 @@
         currentIndex = newIndex;
         videos[currentIndex].classList.add('active');
         
-        // 動画の再生を開始
+        // 動画の再生を開始（ユーザー操作による切替なので、モバイルでも再生してよい）
         videos[currentIndex].currentTime = 0;
         videos[currentIndex].play();
+        window.__heroPlayEnabled = true; // 以後はスクロール復帰時も再生してよい
 
         // テキストとドットを少し遅延してアクティブに（スムーズな切り替え効果）
         setTimeout(() => {
@@ -151,14 +156,17 @@
         carouselContainer.addEventListener('mouseenter', stopAutoPlay);
         carouselContainer.addEventListener('mouseleave', startAutoPlay);
     }
+    // ※ モバイルのタップ再生は script.js 側で document レベルに登録する
+    //   （.scrolling--content が前面に重なり carousel-container はタップを受け取れないため）
 
     // ===========================
     // 初期化
     // ===========================
     function init() {
-        // 最初の動画を再生
-        if (videos[0]) {
+        // 最初の動画を再生（PCのみ自動再生。モバイルは poster を表示しタップ待ち）
+        if (videos[0] && !heroIsMobile) {
             videos[0].play();
+            window.__heroPlayEnabled = true;
         }
 
         // 自動再生を開始（必要に応じてコメントアウト解除）
