@@ -102,39 +102,3 @@ window.addEventListener('resize', () => {
         applyScrollAnimation();     // 現在のスクロール位置で再描画
     }, 200);
 });
-
-// -------------------------- 動画の二重ロード対策 --------------------------
-// 同じ動画ファイルを carousel(section1) と各セクション(container--1/2/3)で
-// 二重に <video> 化しているため、全部を同時にデコードするとメモリを圧迫し、
-// スマホでブラウザが強制リロードする原因になる。
-// preload="none" にした上で、「画面内に入った動画だけ再生し、出たら停止」して
-// 同時にデコードされる本数を最小限に抑える。
-// ※ carousel 内の動画は carousel.js が制御するため、ここでは対象外。
-(() => {
-    const sectionVideos = document.querySelectorAll('.・1--video, .・2--video, .・3--video');
-    if (!sectionVideos.length) return;
-
-    const playSafely = (video) => {
-        const p = video.play();
-        if (p && typeof p.catch === 'function') p.catch(() => {}); // 自動再生拒否は無視
-    };
-
-    if (!('IntersectionObserver' in window)) {
-        // 非対応環境では従来どおり全て再生（フォールバック）
-        sectionVideos.forEach(playSafely);
-        return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            const video = entry.target;
-            if (entry.isIntersecting) {
-                playSafely(video);
-            } else if (!video.paused) {
-                video.pause(); // 画面外ではデコードを止めてメモリを解放
-            }
-        });
-    }, { threshold: 0.1 });
-
-    sectionVideos.forEach((video) => observer.observe(video));
-})();
