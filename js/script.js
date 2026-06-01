@@ -38,6 +38,12 @@ function computeConfig() {
 
 let config = computeConfig();
 
+// 直近に書き込んだ値を覚えておき、変化した時だけDOMへ反映する（冗長な再描画を防ぐ）
+let lastClipRatio = -1;
+let lastTextMove = -1;
+let coverHidden = null;     // true=非表示, false=表示
+let willChangeOn = false;   // will-change を現在付与しているか
+
 // 現在のスクロール量に応じてアニメーションを反映する。
 // scroll / resize の両方から呼び出して状態を一致させる。
 function applyScrollAnimation() {
@@ -45,27 +51,62 @@ function applyScrollAnimation() {
 
     const scrollPosition = window.scrollY;
 
-    // テキストの移動
+    // テキストの移動（値が変わった時だけ書き込み）
     const activeTextScroll = Math.max(0, scrollPosition - config.TEXT_START_SCROLL);
     const textScrollRatio = Math.min(1, activeTextScroll / config.TEXT_ANIMATION_RANGE);
-    const textMove = textScrollRatio * config.TEXT_MOVE_DISTANCE;
-    if (scrollingContent) {
+    const textMove = Math.round(textScrollRatio * config.TEXT_MOVE_DISTANCE);
+    if (scrollingContent && textMove !== lastTextMove) {
         scrollingContent.style.transform = `translateY(-${textMove}px)`;
+        lastTextMove = textMove;
     }
 
-    // 円形クリップの半径
+    // 円形クリップの進捗
     const activeClipScroll = Math.max(0, scrollPosition - config.CLIP_START_SCROLL);
     const clipScrollRatio = Math.min(1, activeClipScroll / config.CLIP_ANIMATION_RANGE);
-    const currentRadius = config.INITIAL_RADIUS - (config.radiusRange * clipScrollRatio);
-    coverPage.style.clipPath = `circle(${currentRadius}px at 50% 0%)`;
 
-    if (clipScrollRatio === 1) {
-        coverPage.style.pointerEvents = 'none';
-        coverPage.style.opacity = '0';
-    } else {
-        coverPage.style.pointerEvents = 'auto';
-        coverPage.style.opacity = '1';
+    // ★ will-change はリビール中（0 < ratio < 1）だけ付与し、それ以外は解除する。
+    //   全画面fixed＋動画入りレイヤーを常時GPU昇格させ続けると、iOS等で
+    //   メモリが急騰し強制リロードを誘発するため。
+    const animating = clipScrollRatio > 0 && clipScrollRatio < 1;
+    if (animating !== willChangeOn) {
+        coverPage.style.willChange = animating ? 'clip-path' : 'auto';
+        willChangeOn = animating;
     }
+
+    // clip-path は進捗が変化した時だけ書き込み（毎フレームの再ラスタライズを抑制）
+    if (clipScrollRatio !== lastClipRatio) {
+        const currentRadius = config.INITIAL_RADIUS - (config.radiusRange * clipScrollRatio);
+        coverPage.style.clipPath = `circle(${currentRadius}px at 50% 0%)`;
+        lastClipRatio = clipScrollRatio;
+    }
+
+    // 表示/非表示の切り替えも状態が変わった時だけ
+    const hidden = clipScrollRatio === 1;
+    if (hidden !== coverHidden) {
+        coverPage.style.pointerEvents = hidden ? 'none' : 'auto';
+        coverPage.style.opacity = hidden ? '0' : '1';
+        coverHidden = hidden;
+        // カバーが隠れている間（＝トップを抜けている間）はカルーセル動画を
+        // 停止してデコードを止める。戻ってきたらアクティブな動画を再生する。
+        // 境界を跨いだ時に一度だけ実行されるため、再生/停止のトグル連発は起きない。
+        toggleCoverVideos(!hidden);
+    }
+}
+
+// カルーセル動画の再生/停止をまとめて制御する
+const coverVideos = document.querySelectorAll('.video--top');
+function toggleCoverVideos(shouldPlay) {
+    if (!coverVideos.length) return;
+    coverVideos.forEach((v) => {
+        if (shouldPlay) {
+            if (v.classList.contains('active')) {
+                const pr = v.play();
+                if (pr && typeof pr.catch === 'function') pr.catch(() => {});
+            }
+        } else if (!v.paused) {
+            v.pause();
+        }
+    });
 }
 
 // スクロールは requestAnimationFrame で間引いて負荷を抑える

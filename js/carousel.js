@@ -33,6 +33,9 @@
         texts[currentIndex].classList.remove('active');
         dots[currentIndex].classList.remove('active');
 
+        // 前の動画は停止してデコードを止める（複数動画の同時デコードを防ぐ）
+        videos[currentIndex].pause();
+
         // 新しいスライドをアクティブに
         currentIndex = newIndex;
         videos[currentIndex].classList.add('active');
