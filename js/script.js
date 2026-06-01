@@ -56,7 +56,10 @@ function applyScrollAnimation() {
     const textScrollRatio = Math.min(1, activeTextScroll / config.TEXT_ANIMATION_RANGE);
     const textMove = Math.round(textScrollRatio * config.TEXT_MOVE_DISTANCE);
     if (scrollingContent && textMove !== lastTextMove) {
-        scrollingContent.style.transform = `translateY(-${textMove}px)`;
+        // ★ 移動量0（＝最上部）では transform を外す。translateY(0) でも transform が
+        //   付いていると常時GPUレイヤーに昇格し、全画面fixedレイヤーが1枚増える。
+        //   iOS(DPR3)では合成レイヤーの枚数がメモリ急騰＝強制リロードの一因になる。
+        scrollingContent.style.transform = textMove === 0 ? '' : `translateY(-${textMove}px)`;
         lastTextMove = textMove;
     }
 
@@ -185,3 +188,14 @@ window.addEventListener('resize', () => {
 
     sectionVideos.forEach((video) => observer.observe(video));
 })();
+
+// -------------------------- バックグラウンド時は動画停止 --------------------------
+// タブ/アプリが非表示になった後も動画をデコードし続けると、iOS が「メモリを
+// 使い過ぎたページ」として復帰時にリロードしやすくなる。非表示中は停止する。
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        coverVideos.forEach((v) => { if (!v.paused) v.pause(); });
+    } else if (!coverHidden) {
+        toggleCoverVideos(true); // 復帰時、トップ表示中ならアクティブ動画を再生
+    }
+});

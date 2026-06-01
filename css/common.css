@@ -124,8 +124,10 @@ overflow-x: hidden; overflow-y: scroll; }
 .menu-trigger.active span:nth-child(1) { top: 50%; transform: translateX(-50%) rotate(45deg); }
 .menu-trigger.active span:nth-child(2) { opacity: 0;}
 .menu-trigger.active span:nth-child(3) { top: 50%; transform: translateX(-50%) rotate(-45deg); }
-.circle-menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; background: #333; clip-path: circle(0px at calc(100% - 50px) 50px); z-index: 1001; pointer-events: none; }
-.circle-menu.active { pointer-events: auto;}
+.circle-menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; background: #333; clip-path: circle(0px at calc(100% - 50px) 50px); z-index: 1001; pointer-events: none; visibility: hidden; }
+/* 閉じている間は visibility:hidden で全画面レイヤーを保持させない（メモリ削減）。
+   .active は開く瞬間に付与され、閉じアニメ完了まで残るのでアニメは欠けない。 */
+.circle-menu.active { pointer-events: auto; visibility: visible; }
 .circle-menu ul { list-style: none; padding: 0; margin: 0; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px; }
 .circle-menu a { color: var(--wh); text-decoration: none; font-size: 2rem; font-weight: bold; opacity: 0; transform: translateY(20px); }
 /* -----------------------------------バーガーメニュー----------------------------------- */
