@@ -75,8 +75,17 @@ function applyScrollAnimation() {
 
     // clip-path は進捗が変化した時だけ書き込み（毎フレームの再ラスタライズを抑制）
     if (clipScrollRatio !== lastClipRatio) {
-        const currentRadius = config.INITIAL_RADIUS - (config.radiusRange * clipScrollRatio);
-        coverPage.style.clipPath = `circle(${currentRadius}px at 50% 0%)`;
+        if (clipScrollRatio === 0) {
+            // ★ 最上部では clip-path 自体を外す。
+            //   進捗0の円は画面対角線より大きく「何も切り抜いていない」が、
+            //   iOS WebKit は再生中の動画を clip-path 越しに毎フレーム合成し続け、
+            //   GPU/メモリが急騰して強制リロードを誘発する。clip を none にすると
+            //   見た目は同一のまま、その負荷がなくなる。
+            coverPage.style.clipPath = 'none';
+        } else {
+            const currentRadius = config.INITIAL_RADIUS - (config.radiusRange * clipScrollRatio);
+            coverPage.style.clipPath = `circle(${currentRadius}px at 50% 0%)`;
+        }
         lastClipRatio = clipScrollRatio;
     }
 
