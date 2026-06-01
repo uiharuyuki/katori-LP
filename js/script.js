@@ -1,40 +1,64 @@
 // -------------------------- 円形SCROLLアニメーション --------------------------
 const coverPage = document.getElementById('coverPage');
-const scrollingContent = document.getElementById('scrollingContent'); 
+const scrollingContent = document.getElementById('scrollingContent');
 
-// レスポンシブ対応の設定
-const isMobile = window.innerWidth <= 1024;
+// レスポンシブの境界(これ以下をモバイル扱い)
+const MOBILE_BREAKPOINT = 1024;
 
-// ---------------------- Animation - px（デバイスに応じて調整）
-const CLIP_START_SCROLL = isMobile ? 800 : 1200;
-const CLIP_ANIMATION_RANGE = isMobile ? 400 : 550;
-const MAX_CLIP_SCROLL = CLIP_START_SCROLL + CLIP_ANIMATION_RANGE;
-// ---------------------- Animation - px
+// 画面サイズに依存する値をまとめて算出する。
+// リサイズ時はこの関数を呼び直すだけで再計算でき、リロードは不要。
+function computeConfig() {
+    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
 
-// ---------------------- text - px
-const TEXT_START_SCROLL = 0;
-const TEXT_ANIMATION_RANGE = isMobile ? 1200 : 1700;
-// ---------------------- text - px
+    // ---------------------- Animation - px（デバイスに応じて調整）
+    const CLIP_START_SCROLL = isMobile ? 800 : 1200;
+    const CLIP_ANIMATION_RANGE = isMobile ? 400 : 550;
 
-const INITIAL_RADIUS = Math.sqrt(window.innerWidth**2 + window.innerHeight**2) / 2 * 2;
-const FINAL_RADIUS = 0;
-const radiusRange = INITIAL_RADIUS - FINAL_RADIUS;
+    // ---------------------- text - px
+    const TEXT_START_SCROLL = 0;
+    const TEXT_ANIMATION_RANGE = isMobile ? 1200 : 1700;
+    const TEXT_MOVE_DISTANCE = isMobile ? 1000 : 1500;
 
-window.addEventListener('scroll', () => {
+    // 画面対角線を基準にした初期半径
+    const INITIAL_RADIUS = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2) / 2 * 2;
+    const FINAL_RADIUS = 0;
+
+    return {
+        isMobile,
+        CLIP_START_SCROLL,
+        CLIP_ANIMATION_RANGE,
+        TEXT_START_SCROLL,
+        TEXT_ANIMATION_RANGE,
+        TEXT_MOVE_DISTANCE,
+        INITIAL_RADIUS,
+        FINAL_RADIUS,
+        radiusRange: INITIAL_RADIUS - FINAL_RADIUS,
+    };
+}
+
+let config = computeConfig();
+
+// 現在のスクロール量に応じてアニメーションを反映する。
+// scroll / resize の両方から呼び出して状態を一致させる。
+function applyScrollAnimation() {
+    if (!coverPage) return;
+
     const scrollPosition = window.scrollY;
-    const activeTextScroll = Math.max(0, scrollPosition - TEXT_START_SCROLL);
-    const textScrollRatio = Math.min(1, activeTextScroll / TEXT_ANIMATION_RANGE);
-    const textMove = textScrollRatio * (isMobile ? 1000 : 1500);
-    
+
+    // テキストの移動
+    const activeTextScroll = Math.max(0, scrollPosition - config.TEXT_START_SCROLL);
+    const textScrollRatio = Math.min(1, activeTextScroll / config.TEXT_ANIMATION_RANGE);
+    const textMove = textScrollRatio * config.TEXT_MOVE_DISTANCE;
     if (scrollingContent) {
         scrollingContent.style.transform = `translateY(-${textMove}px)`;
     }
 
-    const activeClipScroll = Math.max(0, scrollPosition - CLIP_START_SCROLL);
-    const clipScrollRatio = Math.min(1, activeClipScroll / CLIP_ANIMATION_RANGE);
-    const currentRadius = INITIAL_RADIUS - (radiusRange * clipScrollRatio);
+    // 円形クリップの半径
+    const activeClipScroll = Math.max(0, scrollPosition - config.CLIP_START_SCROLL);
+    const clipScrollRatio = Math.min(1, activeClipScroll / config.CLIP_ANIMATION_RANGE);
+    const currentRadius = config.INITIAL_RADIUS - (config.radiusRange * clipScrollRatio);
     coverPage.style.clipPath = `circle(${currentRadius}px at 50% 0%)`;
-    
+
     if (clipScrollRatio === 1) {
         coverPage.style.pointerEvents = 'none';
         coverPage.style.opacity = '0';
@@ -42,30 +66,39 @@ window.addEventListener('scroll', () => {
         coverPage.style.pointerEvents = 'auto';
         coverPage.style.opacity = '1';
     }
-});
+}
 
-const updateRadius = () => {
-    coverPage.style.clipPath = `circle(${INITIAL_RADIUS}px at 50% 0%)`;
-};
-updateRadius();
+// スクロールは requestAnimationFrame で間引いて負荷を抑える
+let scrollTicking = false;
+window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+        applyScrollAnimation();
+        scrollTicking = false;
+    });
+}, { passive: true });
 
-// リサイズ時に再計算
-// 注意: resize は高さの変化でも発火する。スマホではスクロール時に
-// アドレスバーが開閉して高さが変わり resize が発火するため、
-// 「横幅が変わり、かつデバイス種別(モバイル/PC)が切り替わった時」だけリロードする。
+// 初期描画
+applyScrollAnimation();
+
+// -------------------------- リサイズ対応 --------------------------
+// 以前は resize のたびに location.reload() していたが、
+// スマホではスクロール時にアドレスバーの開閉で「高さ」が変化して resize が
+// 発火し、意図しないリロードが起きていた。
+// リロードはやめ、横幅が実際に変わった時だけ値を再計算して再描画する。
+// （高さのみの変化＝アドレスバー開閉では何もしない）
 let resizeTimer;
 let lastWindowWidth = window.innerWidth;
+
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         const currentWidth = window.innerWidth;
-        const wasMobile = lastWindowWidth <= 1024;
-        const nowMobile = currentWidth <= 1024;
+        if (currentWidth === lastWindowWidth) return; // 高さのみの変化は無視
 
-        // 横幅が変化し、かつモバイル/PCの境界をまたいだ場合のみリロード
-        if (currentWidth !== lastWindowWidth && wasMobile !== nowMobile) {
-            location.reload(); // デバイス種別の変更時はリロード
-        }
         lastWindowWidth = currentWidth;
-    }, 250);
+        config = computeConfig();   // 新しい画面サイズで再計算
+        applyScrollAnimation();     // 現在のスクロール位置で再描画
+    }, 200);
 });

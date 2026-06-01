@@ -55,7 +55,11 @@ gsap.to(".scroll-indicator", {
 
 // --------------------------------- スクロール連動アニメーション (円形video)
 // PC画面のみ適用（1025px以上）
-if (window.innerWidth >= 1025) {
+// gsap.matchMedia() を使うことで、リロードせずに画面幅の変化へ追従する。
+// PC幅になると登録され、PC幅を外れると自動でクリーンアップ(pin等も解除)される。
+const mm = gsap.matchMedia();
+
+mm.add("(min-width: 1025px)", () => {
     gsap.to("#・1", {
         scale: 3.55,
         scrollTrigger: {
@@ -91,5 +95,5 @@ if (window.innerWidth >= 1025) {
             ease: "none"
         },
     });
-}
+});
 // --------------------------------- スクロール連動アニメーション (円形video)
